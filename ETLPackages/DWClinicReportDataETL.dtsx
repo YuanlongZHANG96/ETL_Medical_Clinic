@@ -1,0 +1,949 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/7/2022 11:30:59 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-AO8N3T1"
+  DTS:CreatorName="DESKTOP-AO8N3T1\i_ecn"
+  DTS:DTSID="{E6C20E19-9E7F-4B27-A519-4BF085F8FC85}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{1632C925-3195-44E9-8FAE-6607EFCD2EBE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.DWClinicReportDataYuanlongZhang]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A0D02224-B3A7-4E11-8747-287DE75963FF}"
+      DTS:ObjectName="LocalHost.DWClinicReportDataYuanlongZhang">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=DWClinicReportDataYuanlongZhang;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.master]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5C660C9B-848F-4687-AF24-011E46D8B301}"
+      DTS:ObjectName="LocalHost.master">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=master;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Dim Tables Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{7ad5100f-fede-4466-b99d-0781f75a870f}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Dim Tables Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Load Dim Tables Sequence Container\Fill DimClinic Table Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{73130159-7ccb-4b3e-bc1d-bc42472f04be}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimClinic Table Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A0D02224-B3A7-4E11-8747-287DE75963FF}"
+              SQLTask:SqlStatementSource="pETLSyncDimClinics" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Dim Tables Sequence Container\Fill DimDoctors Table Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{365be340-43d3-46b8-b2f6-fb79131e8f1d}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimDoctors Table Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A0D02224-B3A7-4E11-8747-287DE75963FF}"
+              SQLTask:SqlStatementSource="pETLSyncDimDoctors" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Dim Tables Sequence Container\Fill DimPatients Table Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{37dacb53-162b-46e1-afd0-7e49acd1e44e}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimPatients Table Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A0D02224-B3A7-4E11-8747-287DE75963FF}"
+              SQLTask:SqlStatementSource="pETLSyncDimPatients" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Dim Tables Sequence Container\Fill DimProcedures Table Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{f5f840cd-7351-46fa-9c6a-c33140984b2b}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimProcedures Table Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A0D02224-B3A7-4E11-8747-287DE75963FF}"
+              SQLTask:SqlStatementSource="pETLSyncDimProcedures" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Dim Tables Sequence Container\Fill DimShifts Table Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{06514cb5-0e7d-43c4-ad59-82d19b8ad155}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimShifts Table Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A0D02224-B3A7-4E11-8747-287DE75963FF}"
+              SQLTask:SqlStatementSource="pETLSyncDimShifts" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Dim Tables Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{2C6A3B9D-6CB9-4F6D-BA9B-527966452229}"
+          DTS:From="Package\Load Dim Tables Sequence Container\Fill DimClinic Table Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Load Dim Tables Sequence Container\Fill DimDoctors Table Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Dim Tables Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{9DDBDC26-FD09-41AC-9FBD-A6BFAB36AA30}"
+          DTS:From="Package\Load Dim Tables Sequence Container\Fill DimDoctors Table Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Load Dim Tables Sequence Container\Fill DimPatients Table Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Dim Tables Sequence Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{8108D9FD-3A62-4F10-89C8-C475937B6F99}"
+          DTS:From="Package\Load Dim Tables Sequence Container\Fill DimPatients Table Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Load Dim Tables Sequence Container\Fill DimProcedures Table Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Dim Tables Sequence Container.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{FBC42AA0-E48D-4DE9-945F-6AAB16221AD0}"
+          DTS:From="Package\Load Dim Tables Sequence Container\Fill DimProcedures Table Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Load Dim Tables Sequence Container\Fill DimShifts Table Task" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load the Fact Table Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{2160a31d-7658-489a-9fa5-d4d9026a089e}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load the Fact Table Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Load the Fact Table Sequence Container\Fill FactDoctorShifts Table Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{798c2377-c5ce-41bb-a377-4c94ff072b51}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill FactDoctorShifts Table Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A0D02224-B3A7-4E11-8747-287DE75963FF}"
+              SQLTask:SqlStatementSource="pETLSyncFactDoctorShifts" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load the Fact Table Sequence Container\Fill FactVisits Table Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{a0a88959-14b9-4021-9ba4-3d8143a319d3}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill FactVisits Table Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A0D02224-B3A7-4E11-8747-287DE75963FF}"
+              SQLTask:SqlStatementSource="pETLSyncFactVisits" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load the Fact Table Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{745CCCB4-A8AE-4A00-AC00-4B45E7DBD91C}"
+          DTS:From="Package\Load the Fact Table Sequence Container\Fill FactDoctorShifts Table Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Load the Fact Table Sequence Container\Fill FactVisits Table Task" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Post-Load Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{aad7d934-673a-4450-afac-36de3f333165}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Post-Load Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Pre-Load (Data Warehouse) Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{4ffa0143-a75b-4f73-bdd0-72584371158b}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Pre-Load (Data Warehouse) Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Pre-Load (Data Warehouse) Sequence Container\Initialize All the Store Procedures Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{250419ca-2377-4a46-9790-8309631a61d9}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initialize All the Store Procedures Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A0D02224-B3A7-4E11-8747-287DE75963FF}"
+              SQLTask:SqlStatementSource="--*************************************************************************--&#xA;-- Title: DWFinal&#xA;-- Author: Yuanlong Zhang&#xA;-- Desc: This file tests you knowlege on how to create a Incremental ETL process with SQL code&#xA;-- Change Log: When,Who,What&#xA;-- 2021-01-17,RRoot,Created File&#xA;-- 2022-01-24,Yuanlong Zhang, Completed File&#xA;-- 2022-03-07,Yuanlong Zhang, Updated the file for Final Projects&#xA;&#xA;--**************************************************************************--&#xA;IF NOT EXISTS (SELECT 1 from sys.servers where name = 'continuumsql.westus2.cloudapp.azure.com')&#xA;BEGIN&#xA;  EXEC sp_addlinkedserver @server = 'continuumsql.westus2.cloudapp.azure.com'&#xA;  EXEC sp_addlinkedsrvlogin 'continuumsql.westus2.cloudapp.azure.com'&#xA;                         ,'false'&#xA;                         ,NULL&#xA;                         ,'BICert'&#xA;                         ,'BICert'&#xA;END&#xA;&#xA;IF NOT EXISTS (SELECT 1 from sys.servers where name = 'is-root01.ischool.uw.edu\BI')&#xA;BEGIN&#xA;  EXEC sp_addlinkedserver @server = 'is-root01.ischool.uw.edu\BI'&#xA;  EXEC sp_addlinkedsrvlogin 'is-root01.ischool.uw.edu\BI'&#xA;                         ,'false'&#xA;                         ,NULL&#xA;                         ,'BICert'&#xA;                         ,'BICert'&#xA;END&#xA;&#xA;&#xA;USE [DWClinicReportDataYuanlongZhang];&#xA;go&#xA;SET NoCount ON;&#xA;&#xA;--  Setup Logging Objects ----------------------------------------------------&#xA;&#xA;If NOT Exists(Select * From sys.tables where Name = 'ETLLog')&#xA;  Create -- Drop&#xA;  Table ETLLog&#xA;  (ETLLogID int identity Primary Key&#xA;  ,ETLDateAndTime datetime Default GetDate()&#xA;  ,ETLAction varchar(100)&#xA;  ,ETLLogMessage varchar(2000)&#xA;  );&#xA;go&#xA;&#xA;Create or Alter View vETLLog&#xA;As&#xA;  Select&#xA;   ETLLogID&#xA;  ,ETLDate = Format(ETLDateAndTime, 'D', 'en-us')&#xA;  ,ETLTime = Format(Cast(ETLDateAndTime as datetime2), 'HH:mm', 'en-us')&#xA;  ,ETLAction&#xA;  ,ETLLogMessage&#xA;  From ETLLog;&#xA;go&#xA;&#xA;&#xA;Create or Alter Proc pInsETLLog&#xA; (@ETLAction varchar(100), @ETLLogMessage varchar(2000))&#xA;--*************************************************************************--&#xA;-- Desc:This Sproc creates an admin table for logging ETL metadata. &#xA;-- Change Log: When,Who,What&#xA;-- 2020-01-01,RRoot,Created Sproc&#xA;--*************************************************************************--&#xA;As&#xA;Begin&#xA;  Declare @RC int = 0;&#xA;  Begin Try&#xA;    Begin Tran;&#xA;      Insert Into ETLLog&#xA;       (ETLAction,ETLLogMessage)&#xA;      Values&#xA;       (@ETLAction,@ETLLogMessage)&#xA;    Commit Tran;&#xA;    Set @RC = 1;&#xA;  End Try&#xA;  Begin Catch&#xA;    If @@TRANCOUNT &gt; 0 Rollback Tran;&#xA;    Set @RC = -1;&#xA;  End Catch&#xA;  Return @RC;&#xA;End&#xA;Go&#xA;&#xA;--********************************************************************--&#xA;-- A) Drop the FOREIGN KEY CONSTRAINTS and Clear the tables&#xA; -- NOT NEEDED FOR INCREMENTAL LOADING: &#xA;--********************************************************************--&#xA;&#xA;&#xA;--********************************************************************--&#xA;-- B) Synchronize the Tables&#xA;--********************************************************************--&#xA;&#xA;/****** [dbo].[DimDates] ******/&#xA;Create or Alter Procedure pETLFillDimDates&#xA;/* Author: RRoot&#xA;** Desc: Inserts data Into DimDates&#xA;** Change Log: When,Who,What&#xA;** 20200117,RRoot,Created Sproc.&#xA;*/&#xA;AS&#xA; Begin&#xA;  Declare @RC int = 0;&#xA;  Begin Try&#xA;&#xA;    -- ETL Processing Code --&#xA;      Declare @StartDate datetime = '01/01/2000'&#xA;      Declare @EndDate datetime = '12/31/2030' &#xA;      Declare @DateInProcess datetime  = @StartDate&#xA;      -- Loop through the dates until you reach the end date&#xA;      While @DateInProcess &lt;= @EndDate&#xA;       Begin&#xA;       -- Add a row Into the date dimension table for this date&#xA;&#x9;   -- If ((Select Count(*) From DimDates) = 0) &#xA;       Insert Into DimDates &#xA;       ( [FullDate],[FullDateName],[MonthID],[MonthName],[YearID],[YearName])&#xA;       Values ( &#xA;         --Cast(Convert(nVarchar(50), @DateInProcess, 112) as int) -- [DateKey]&#xA;        @DateInProcess -- [FullDate]&#xA;        ,DateName(weekday, @DateInProcess) + ', ' + Convert(nVarchar(50), @DateInProcess, 110) -- [DateName]  &#xA;        ,Cast(Left(Convert(nVarchar(50), @DateInProcess, 112), 6) as int)  -- [MonthID]&#xA;        ,DateName(month, @DateInProcess) + ' - ' + DateName(YYYY,@DateInProcess) -- [MonthName]&#xA;        ,Year(@DateInProcess) -- [YearID] &#xA;        ,Cast(Year(@DateInProcess ) as nVarchar(50)) -- [YearName] &#xA;        )  &#xA;       -- Add a day and loop again&#xA;       Set @DateInProcess = DateAdd(d, 1, @DateInProcess)&#xA;       End&#xA;&#xA;    Exec pInsETLLog&#xA;&#x9;        @ETLAction = 'pETLFillDimDates'&#xA;&#x9;       ,@ETLLogMessage = 'DimDates filled';&#xA;    Set @RC = +1&#xA;  End Try&#xA;  Begin Catch&#xA;     Declare @ErrorMessage nvarchar(1000) = Error_Message();&#xA;&#x9; Exec pInsETLLog &#xA;&#x9;      @ETLAction = 'pETLFillDimDates'&#xA;&#x9;     ,@ETLLogMessage = @ErrorMessage;&#xA;    Set @RC = -1&#xA;  End Catch&#xA;  Return @RC;&#xA; End&#xA;go&#xA;/* Testing Code:&#xA; Declare @Status int;&#xA; Exec @Status = pETLFillDimDates;&#xA; Print @Status;&#xA; Select * From DimDates;&#xA; Select * From vETLLog;&#xA;*/&#xA;go&#xA;&#xA;&#xA;/****** [dbo].[DimDoctors] ******/&#xA;go &#xA;Create or Alter View vETLDimDoctors&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Extracts and transforms data for DimDoctors&#xA;** Change Log: When,Who,What&#xA;** 2022-01-24,Yuanlong Zhang,Created Sproc (MERGE).&#xA;** 2022-03-07,Yuanlong Zhang,Created Sproc (MERGE) for final project.&#xA;*/&#xA;As&#xA;  Select&#xA;&#x9;    [DoctorID] = d.DoctorID&#xA;&#x9;   ,[DoctorFullName] = d.FirstName + ' ' + d.LastName&#xA;&#x9;   ,[DoctorEmailAddress] = d.EmailAddress&#xA;&#x9;   ,[DoctorCity] = TRIM(d.City)&#xA;&#x9;   ,[DoctorState] = CASE WHEN LEN(TRIM(d.State)) &gt; 2 THEN '(ERROR) ' + TRIM(d.State) ELSE TRIM(d.State) END&#xA;&#x9;   ,[DoctorZip] = d.Zip&#xA;  From [continuumsql.westus2.cloudapp.azure.com].[DoctorsSchedules].[dbo].[Doctors] d&#xA;  UNION&#xA;  Select -1, 'No Doctor', 'N/A', 'N/A', 'N/A', 000000&#xA;go&#xA;/* Testing Code:&#xA; Select * From vETLDimDoctors;&#xA;*/&#xA;&#xA;go&#xA;Create or Alter Procedure pETLSyncDimDoctors&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Updates data in DimDoctors using the vETLDimDoctors view&#xA;** Change Log: When,Who,What&#xA;** 2022-01-24,Yuanlong Zhang,Created Sproc (MERGE).&#xA;** 2022-03-07,Yuanlong Zhang,Created Sproc (MERGE) for final project.&#xA;*/&#xA;AS&#xA;Begin&#xA;&#x9;Declare @RC int = 0;&#xA;  Begin Try&#xA;    -- ETL Processing Code --&#xA;    Merge Into DimDoctors as t&#xA;     Using vETLDimDoctors as s -- For Merge to work with SCD tables, I need to insert a new row when the following is not true:&#xA;      On  t.DoctorID = s.DoctorID&#xA;     When Not Matched -- At least one column value does not match add a new row:&#xA;      Then&#xA;       Insert (DoctorID, DoctorFullName, DoctorEmailAddress,DoctorCity,DoctorState, DoctorZip)&#xA;        Values (s.DoctorID&#xA;&#x9;&#x9;&#x9;  ,s.DoctorFullName&#xA;              ,s.DoctorEmailAddress&#xA;              ,s.DoctorCity&#xA;              ,s.DoctorState&#xA;&#x9;&#x9;&#x9;  ,s.DoctorZip)&#xA;      When Matched &#xA;&#x9;  AND t.DoctorEmailAddress &lt;&gt; s.DoctorEmailAddress &#xA;&#x9;  OR t.DoctorCity &lt;&gt; s.DoctorCity&#xA;&#x9;  OR t.DoctorState &lt;&gt; s.DoctorState&#xA;&#x9;  OR t.DoctorZip &lt;&gt; s.DoctorZip-- If there is a row in the target (dim) table that is no longer in the source table&#xA;       Then -- indicate that row is no longer current&#xA;        Update &#xA;         Set t.DoctorEmailAddress = s.DoctorEmailAddress&#xA;            ,t.DoctorCity = s.DoctorCity&#xA;&#x9;&#x9;&#x9;,t.DoctorState = s.DoctorState&#xA;&#x9;&#x9;&#x9;,t.DoctorZip = s.DoctorZip&#xA;&#x9;  When Not Matched by Source&#xA;&#x9;  Then&#xA;&#x9;   Update&#xA;&#x9;    Set t.DoctorFullName = iif(patindex('%(Deleted)%',[DoctorFullName]) &gt; 0, [DoctorFullName], [DoctorFullName] + ' (Deleted)')    &#xA;    ;&#xA;&#xA;    -- ETL Logging Code --&#xA;&#x9;&#x9;Exec pInsETLLog&#xA;&#x9;        @ETLAction = 'pETLSyncDimDoctors'&#xA;&#x9;       ,@ETLLogMessage = 'DimDoctors synced';&#xA;&#x9;&#x9;Set @RC = +1&#xA;&#x9;End Try&#xA;&#x9;Begin Catch&#xA;&#x9;&#x9;Declare @ErrorMessage nvarchar(1000) = Error_Message();&#xA;&#x9;&#x9;Exec pInsETLLog &#xA;&#x9;      @ETLAction = 'pETLSyncDimDoctors'&#xA;&#x9;     ,@ETLLogMessage = @ErrorMessage;&#xA;&#x9;&#x9;Set @RC = -1&#xA;&#x9;End Catch&#xA;&#x9;Return @RC;&#xA;End&#xA;go&#xA;/* Testing Code:&#xA; Declare @Status int;&#xA; Exec @Status = pETLSyncDimDoctors;&#xA; Print @Status;&#xA; Select * From DimDoctors&#xA;*/&#xA;&#xA;/****** [dbo].[DimClinics] ******/&#xA;go &#xA;Create or Alter View vETLDimClinics&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Extracts and transforms data for DimClinics&#xA;** Change Log: When,Who,What&#xA;** 2022-01-24,Yuanlong Zhang,Created Sproc (MERGE).&#xA;** 2022-03-07,Yuanlong Zhang,Created Sproc (MERGE) for final project.&#xA;*/&#xA;As&#xA;  Select&#xA;&#x9;    [ClinicID] = str(c.ClinicID)&#xA;&#x9;   ,[ClinicName] = C.ClinicName&#xA;&#x9;   ,[ClinicCity] = C.City&#xA;&#x9;   ,[ClinicState] = C.State&#xA;&#x9;   ,[ClinicZip] = C.Zip&#xA;  From [continuumsql.westus2.cloudapp.azure.com].[DoctorsSchedules].[dbo].[Clinics] c&#xA;go&#xA;/* Testing Code:&#xA; Select * From vETLDimClinics;&#xA;*/&#xA;&#xA;&#xA;go&#xA;Create or Alter Procedure pETLSyncDimClinics&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Updates data in DimClinics using the vETLDimClinics view&#xA;** Change Log: When,Who,What&#xA;** 2022-01-24,Yuanlong Zhang,Created Sproc (MERGE).&#xA;** 2022-03-07,Yuanlong Zhang,Created Sproc (MERGE) for final project.&#xA;*/&#xA;AS&#xA;Begin&#xA;&#x9;Declare @RC int = 0;&#xA;  Begin Try&#xA;    -- ETL Processing Code --&#xA;    Merge Into DimClinics as t&#xA;     Using vETLDimClinics as s -- For Merge to work with SCD tables, I need to insert a new row when the following is not true:&#xA;      On  t.ClinicID = s.ClinicID&#xA;     When Not Matched -- At least one column value does not match add a new row:&#xA;      Then&#xA;       Insert (ClinicID, ClinicName, ClinicCity,ClinicState,ClinicZip)&#xA;        Values (s.ClinicID&#xA;&#x9;&#x9;&#x9;  ,s.ClinicName&#xA;              ,s.ClinicCity&#xA;              ,s.ClinicState&#xA;              ,s.ClinicZip)&#xA;      When Matched &#xA;&#x9;  AND t.ClinicName &lt;&gt; s.ClinicName &#xA;&#x9;  OR t.ClinicCity &lt;&gt; s.ClinicCity&#xA;&#x9;  OR t.ClinicState &lt;&gt; s.ClinicState&#xA;&#x9;  OR t.ClinicZip &lt;&gt; s.ClinicZip-- If there is a row in the target (dim) table that is no longer in the source table&#xA;       Then -- indicate that row is no longer current&#xA;        Update &#xA;         Set t.ClinicName = s.ClinicName&#xA;            ,t.ClinicCity = s.ClinicCity&#xA;&#x9;&#x9;&#x9;,t.ClinicState = s.ClinicState&#xA;&#x9;&#x9;&#x9;,t.ClinicZip = s.ClinicZip&#xA;&#x9;  When Not Matched by Source&#xA;&#x9;  Then&#xA;&#x9;   Update&#xA;&#x9;    Set ClinicName = iif(patindex('%(Deleted)%',[ClinicName]) &gt; 0, [ClinicName], [ClinicName] + ' (Deleted)')    &#xA;&#xA;    ;&#xA;&#xA;    -- ETL Logging Code --&#xA;&#x9;&#x9;Exec pInsETLLog&#xA;&#x9;        @ETLAction = 'pETLSyncDimClinics'&#xA;&#x9;       ,@ETLLogMessage = 'DimClinics synced';&#xA;&#x9;&#x9;Set @RC = +1&#xA;&#x9;End Try&#xA;&#x9;Begin Catch&#xA;&#x9;&#x9;Declare @ErrorMessage nvarchar(1000) = Error_Message();&#xA;&#x9;&#x9;Exec pInsETLLog &#xA;&#x9;      @ETLAction = 'pETLSyncDimClinics'&#xA;&#x9;     ,@ETLLogMessage = @ErrorMessage;&#xA;&#x9;&#x9;Set @RC = -1&#xA;&#x9;End Catch&#xA;&#x9;Return @RC;&#xA;End&#xA;go&#xA;/* Testing Code:&#xA; Declare @Status int;&#xA; Exec @Status = pETLSyncDimClinics;&#xA; Print @Status;&#xA; Select * From DimClinics&#xA;*/&#xA;&#xA;/****** [dbo].[DimShifts] ******/&#xA;go &#xA;Create or Alter View vETLDimShifts&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Extracts and transforms data for DimShifts&#xA;** Change Log: When,Who,What&#xA;** 2022-01-24,Yuanlong Zhang,Created Sproc (MERGE).&#xA;** 2022-03-07,Yuanlong Zhang,Created Sproc (MERGE) for final project.&#xA;*/&#xA;As&#xA;  Select&#xA;&#x9;    [ShiftID] = s.ShiftID&#xA;&#x9;   ,[ShiftStart] = s.ShiftStart&#xA;&#x9;   ,[ShiftEnd] = s.ShiftEnd&#xA;  From [continuumsql.westus2.cloudapp.azure.com].[DoctorsSchedules].[dbo].[Shifts] s&#xA;go&#xA;/* Testing Code:&#xA; Select * From vETLDimShifts;&#xA;*/&#xA;&#xA;&#xA;go&#xA;Create or Alter Procedure pETLSyncDimShifts&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Updates data in DimShifts using the vETLDimShifts view&#xA;** Change Log: When,Who,What&#xA;** 2022-01-24,Yuanlong Zhang,Created Sproc (MERGE).&#xA;** 2022-03-07,Yuanlong Zhang,Created Sproc (MERGE) for final project.&#xA;*/&#xA;AS&#xA;Begin&#xA;&#x9;Declare @RC int = 0;&#xA;  Begin Try&#xA;    -- ETL Processing Code --&#xA;    Merge Into DimShifts as t&#xA;     Using vETLDimShifts as s -- For Merge to work with SCD tables, I need to insert a new row when the following is not true:&#xA;      On  t.ShiftID = s.ShiftID&#xA;     When Not Matched -- At least one column value does not match add a new row:&#xA;      Then&#xA;       Insert (ShiftID,ShiftStart,ShiftEnd)&#xA;        Values (s.ShiftID&#xA;&#x9;&#x9;&#x9;  ,s.ShiftStart&#xA;              ,s.ShiftEnd)&#xA;      When Matched &#xA;&#x9;  AND t.ShiftStart &lt;&gt; s.ShiftStart &#xA;&#x9;  OR t.ShiftEnd &lt;&gt; s.ShiftEnd&#xA;&#x9;  -- If there is a row in the target (dim) table that is no longer in the source table&#xA;       Then -- indicate that row is no longer current&#xA;        Update &#xA;         Set t.ShiftStart = s.ShiftStart&#xA;            ,t.ShiftEnd = s.ShiftEnd&#xA;    ;&#xA;&#xA;    -- ETL Logging Code --&#xA;&#x9;&#x9;Exec pInsETLLog&#xA;&#x9;        @ETLAction = 'pETLSyncDimShifts'&#xA;&#x9;       ,@ETLLogMessage = 'DimShifts synced';&#xA;&#x9;&#x9;Set @RC = +1&#xA;&#x9;End Try&#xA;&#x9;Begin Catch&#xA;&#x9;&#x9;Declare @ErrorMessage nvarchar(1000) = Error_Message();&#xA;&#x9;&#x9;Exec pInsETLLog &#xA;&#x9;      @ETLAction = 'pETLSyncDimShifts'&#xA;&#x9;     ,@ETLLogMessage = @ErrorMessage;&#xA;&#x9;&#x9;Set @RC = -1&#xA;&#x9;End Catch&#xA;&#x9;Return @RC;&#xA;End&#xA;go&#xA;/* Testing Code:&#xA; Declare @Status int;&#xA; Exec @Status = pETLSyncDimShifts;&#xA; Print @Status;&#xA; Select * From DimShifts&#xA;*/&#xA;&#xA;&#xA;/****** [dbo].[FactDoctorShifts] ******/&#xA;go &#xA;Create or Alter View vETLFactDoctorShifts&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Extracts and transforms data for FactDoctorShifts&#xA;** Change Log: When,Who,What&#xA;** 2022-01-25,Yuanlong Zhang,Created Sproc (MERGE).&#xA;** 2022-03-07,Yuanlong Zhang,Created Sproc (MERGE) for Final Projects.&#xA;*/&#xA;As&#xA;  SELECT [DoctorsShiftID] = DS.DoctorsShiftID&#xA;        ,[ShiftDateKey] = DK.DateKey&#xA;        ,[ClinicKey] = DC.ClinicID&#xA;        ,[ShiftKey] = DSS.ShiftKey&#xA;        ,[DoctorKey] = DD.DoctorID&#xA;        ,[HoursWorked] = CASE &#xA;&#x9;&#x9;&#x9;WHEN DATEPART(hour,DSS.ShiftStart) &lt; DATEPART(hour,DSS.ShiftEnd) &#xA;&#x9;&#x9;&#x9;THEN DATEDIFF(hour,DSS.ShiftStart,DSS.ShiftEnd)&#xA;&#x9;&#x9;&#x9;ELSE DATEDIFF(hour,DSS.ShiftStart,DSS.ShiftEnd) + 24&#xA;&#x9;&#x9;&#x9;END&#xA;    FROM [continuumsql.westus2.cloudapp.azure.com].[DoctorsSchedules].[dbo].[DoctorShifts] as DS&#xA;    JOIN DWClinicReportDataYuanlongZhang.dbo.DimDates as DK&#xA;     ON DS.ShiftDate = DK.FullDate&#xA;    JOIN DWClinicReportDataYuanlongZhang.dbo.DimDoctors as DD&#xA;     ON DS.DoctorID = DD.DoctorID&#xA;    JOIN DWClinicReportDataYuanlongZhang.dbo.DimClinics as DC&#xA;     ON DS.ClinicID = DC.ClinicID&#xA;    JOIN DWClinicReportDataYuanlongZhang.dbo.DimShifts as DSS&#xA;     ON DS.ShiftID = DSS.ShiftID&#xA;go&#xA;&#xA;/* Testing Code:&#xA; Select * From vETLFactDoctorShifts;&#xA;*/&#xA;&#xA;&#xA;go&#xA;Create or Alter Procedure pETLSyncFactDoctorShifts&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Inserts data into FactDoctorShifts&#xA;** Change Log: When,Who,What&#xA;** 2022-01-25, Yuanlong Zhang, Created Sproc (MERGE).&#xA;** 2022-03-07, Yuanlong Zhang, Updated Sproc (MERGE) for final projects.&#xA;*/&#xA;As&#xA; Begin&#xA;  Declare @RC int = 0;&#xA;  Begin Try&#xA;    -- ETL Processing Code：  --&#xA;&#x9;Begin Tran;&#xA;&#x9;&#x9;Merge Into FactDoctorShifts as t&#xA;&#x9;&#x9;Using vETLFactDoctorShifts as s&#xA;&#x9;&#x9;&#x9;ON t.DoctorsShiftID = s.DoctorsShiftID&#xA;&#x9;&#x9;&#x9;AND t.ShiftDateKey = s.ShiftDateKey&#xA;&#x9;&#x9;&#x9;AND t.ClinicKey = s.ClinicKey&#xA;&#x9;&#x9;&#x9;AND t.ShiftKey = s.ShiftKey&#xA;&#x9;&#x9;&#x9;AND t.DoctorKey = s.DoctorKey&#xA;&#x9;&#x9;&#x9;When Not Matched &#xA;&#x9;&#x9;&#x9;&#x9;Then -- The Primary Key in Fact Table included 5 columns, when the combination of them in the Source is not found the the Target&#xA;&#x9;&#x9;&#x9;&#x9;INSERT &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;VALUES ( s.DoctorsShiftID, s.ShiftDateKey, s.ClinicKey, s.ShiftKey, s.DoctorKey, s.HoursWorked )&#xA;&#x9;&#x9;&#x9;When Matched -- When the IDs match for the row currently being looked &#xA;&#x9;&#x9;&#x9;AND  t.HoursWorked &lt;&gt; s.HoursWorked -- but the order quantity&#xA;&#x9;&#x9;&#x9;&#x9;Then &#xA;&#x9;&#x9;&#x9;&#x9;UPDATE -- It know your target, so you dont specify the DimCustomers&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;SET t.HoursWorked = s.HoursWorked&#xA;&#x9;&#x9;&#x9;When Not Matched By Source &#xA;&#x9;&#x9;&#x9;&#x9;Then -- The Primary Key is in the Target table, but not the source table&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;DELETE&#xA;&#x9;&#x9;; -- The merge statement demands a semicolon at the end!&#xA;&#xA;&#xA;&#x9;Commit Tran;&#xA;&#x9;Set @RC = +1&#xA;    Exec pInsETLLog&#xA;&#x9;        @ETLAction = 'pETLSyncFactDoctorShifts'&#xA;&#x9;       ,@ETLLogMessage = 'FactDoctorShifts Synced';&#xA;    Set @RC = 1;&#xA;   End try&#xA;   Begin catch&#xA;&#x9; IF @@TranCount &gt; 0 Rollback Tran;&#xA;     Declare @ErrorMessage nvarchar(1000) = Error_Message()&#xA;&#x9; Exec pInsETLLog &#xA;&#x9;      @ETLAction = 'pETLSyncFactDoctorShifts'&#xA;&#x9;     ,@ETLLogMessage = @ErrorMessage;&#xA;     Set @RC = -1;&#xA;   End Catch&#xA;   Return @RC;&#xA; End&#xA;;&#xA;go&#xA;/* Testing Code:&#xA; Declare @Status int;&#xA; Exec @Status = pETLSyncFactDoctorShifts;&#xA; Print @Status;&#xA; select * from factdoctorshifts&#xA;*/&#xA;go&#xA;&#xA;&#xA;/****** [dbo].[DimProcedures] ******/&#xA;go &#xA;Create or Alter View vETLDimProcedures&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Extracts and transforms data for DimProcedures&#xA;** Change Log: When,Who,What&#xA;** 2022-01-24,Yuanlong Zhang,Created Sproc (MERGE).&#xA;** 2022-03-07,Yuanlong Zhang,Created Sproc (MERGE) for final project.&#xA;*/&#xA;As&#xA;  Select&#xA;&#x9;    [ProcedureID] = p.ID&#xA;&#x9;   ,[ProcedureName] = p.[Name]&#xA;&#x9;   ,[ProcedureDesc] = p.[Desc]&#xA;&#x9;   ,[ProcedureCharge] = p.Charge&#xA;  From [is-root01.ischool.uw.edu\BI].[Patients].[dbo].[Procedures] p&#xA;go&#xA;/* Testing Code:&#xA; Select * From vETLDimProcedures;&#xA;*/&#xA;&#xA;&#xA;go&#xA;Create or Alter Procedure pETLSyncDimProcedures&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Updates data in DimShifts using the vETLDimProcedures view&#xA;** Change Log: When,Who,What&#xA;** 2022-01-24,Yuanlong Zhang,Created Sproc (MERGE).&#xA;** 2022-03-07,Yuanlong Zhang,Created Sproc (MERGE) for final project.&#xA;*/&#xA;AS&#xA;Begin&#xA;&#x9;Declare @RC int = 0;&#xA;  Begin Try&#xA;    -- ETL Processing Code --&#xA;    Merge Into DimProcedures as t&#xA;     Using vETLDimProcedures as s -- For Merge to work with SCD tables, I need to insert a new row when the following is not true:&#xA;      On  t.ProcedureID = s.ProcedureID&#xA;     When Not Matched -- At least one column value does not match add a new row:&#xA;      Then&#xA;       Insert (ProcedureID, ProcedureName,ProcedureDesc, ProcedureCharge)&#xA;        Values (s.ProcedureID&#xA;&#x9;&#x9;&#x9;  ,s.ProcedureName&#xA;              ,s.ProcedureDesc&#xA;&#x9;&#x9;&#x9;  ,s.ProcedureCharge)&#xA;      When Matched &#xA;&#x9;  AND t.ProcedureName &lt;&gt; s.ProcedureName &#xA;&#x9;  OR t.ProcedureDesc &lt;&gt; s.ProcedureDesc&#xA;&#x9;  OR t.ProcedureCharge &lt;&gt; s.ProcedureCharge&#xA;&#x9;  -- If there is a row in the target (dim) table that is no longer in the source table&#xA;       Then -- indicate that row is no longer current&#xA;        Update &#xA;         Set t.ProcedureName = s.ProcedureName&#xA;            ,t.ProcedureDesc = s.ProcedureDesc&#xA;&#x9;&#x9;&#x9;,t.ProcedureCharge = s.ProcedureCharge&#xA;&#x9;  When Not Matched by Source&#xA;&#x9;  Then&#xA;&#x9;   Update&#xA;&#x9;    Set ProcedureName = iif(patindex('%(Deleted)%',[ProcedureName]) &gt; 0, [ProcedureName], [ProcedureName] + ' (Deleted)')    &#xA;&#xA;    ;&#xA;&#xA;    -- ETL Logging Code --&#xA;&#x9;&#x9;Exec pInsETLLog&#xA;&#x9;        @ETLAction = 'pETLSyncDimProcedures'&#xA;&#x9;       ,@ETLLogMessage = 'DimProcedures synced';&#xA;&#x9;&#x9;Set @RC = +1&#xA;&#x9;End Try&#xA;&#x9;Begin Catch&#xA;&#x9;&#x9;Declare @ErrorMessage nvarchar(1000) = Error_Message();&#xA;&#x9;&#x9;Exec pInsETLLog &#xA;&#x9;      @ETLAction = 'pETLSyncDimProcedures'&#xA;&#x9;     ,@ETLLogMessage = @ErrorMessage;&#xA;&#x9;&#x9;Set @RC = -1&#xA;&#x9;End Catch&#xA;&#x9;Return @RC;&#xA;End&#xA;go&#xA;/* Testing Code:&#xA; Declare @Status int;&#xA; Exec @Status = pETLSyncDimProcedures;&#xA; Print @Status;&#xA; Select * From DimProcedures&#xA;*/&#xA;&#xA;&#xA;/****** [dbo].[DimPatients] ******/&#xA;go &#xA;Create or Alter View vETLDimPatients&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Extracts and transforms data for DimPatients - SCD-2&#xA;** Change Log: When,Who,What&#xA;** 2022-01-25,Yuanlong Zhang,Created Sproc (MERGE).&#xA;** 2022-03-07,Yuanlong Zhang,Created Sproc (MERGE) for final project.&#xA;*/&#xA;As&#xA;  Select [PatientID] = p.ID&#xA;        ,[PatientFullName] = Cast(p.FName+ ' ' + p.LName as nvarchar(100))&#xA;        ,[PatientCity] = p.City&#xA;        ,[PatientState] = p.State&#xA;        ,[PatientZipCode] = p.ZipCode&#xA;    FROM [is-root01.ischool.uw.edu\BI].[Patients].[dbo].[Patients] p&#xA;go&#xA;/* Testing Code:&#xA; Select * From vETLDimPatients;&#xA;*/&#xA;&#xA;go&#xA;Create or Alter Procedure pETLSyncDimPatients&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Inserts data into DimPatients  - Type 2 SCD&#xA;** Change Log: When,Who,What&#xA;** 2022-01-24,Yuanlong Zhang,Created Sproc (MERGE).&#xA;** 2022-03-07,Yuanlong Zhang,Created Sproc (MERGE) for final project.&#xA;*/&#xA;As&#xA;Begin&#xA;  Declare @RC int = 0;&#xA;&#x9;Begin Try&#xA;    -- ETL Processing Code --&#xA;    Merge Into DimPatients as t&#xA;     Using vETLDimPatients as s -- For Merge to work with SCD tables, I need to insert a new row when the following is not true:&#xA;      On  t.PatientID = s.PatientID&#xA;      And t.PatientFullName = s.PatientFullName&#xA;      And t.PatientCity = s.PatientCity&#xA;      And t.PatientState = s.PatientState&#xA;&#x9;  And t.PatientZipCode = s.PatientZipCode&#xA;     When Not Matched -- At least one column value does not match add a new row:&#xA;      Then&#xA;       Insert (PatientID, PatientFullName, PatientCity, PatientState, PatientZipCode, &#xA;               StartDate, EndDate, IsCurrent)&#xA;        Values (s.PatientID&#xA;              ,s.PatientFullName&#xA;              ,s.PatientCity&#xA;              ,s.PatientState&#xA;&#x9;&#x9;&#x9;  ,s.PatientZipCode&#xA;              ,Cast(Convert(nvarchar(100), GetDate(), 112) as date) -- Smart Key can be joined to the DimDate&#xA;              ,Null&#xA;              ,1)&#xA;      When Not Matched By Source -- If there is a row in the target (dim) table that is no longer in the source table&#xA;       Then -- indicate that row is no longer current&#xA;        Update &#xA;         Set t.EndDate = Cast(Convert(nvarchar(100), GetDate(), 112) as date) -- Smart Key can be joined to the DimDate&#xA;            ,t.IsCurrent = 0&#xA;    ;&#xA;&#xA;    -- ETL Logging Code --&#xA;&#x9;&#x9;Exec pInsETLLog&#xA;&#x9;        @ETLAction = 'pETLSyncDimPatients'&#xA;&#x9;       ,@ETLLogMessage = 'DimPatients synced';&#xA;&#x9;&#x9;Set @RC = +1&#xA;&#x9;End Try&#xA;&#xA;&#x9;-- Error Handling Code --&#xA;&#x9;Begin Catch&#xA;&#x9;&#x9;Declare @ErrorMessage nvarchar(1000) = Error_Message();&#xA;&#xA;    -- ETL Logging Code --&#xA;&#x9;&#x9;Exec pInsETLLog &#xA;&#x9;      @ETLAction = 'pETLSyncDimPatients'&#xA;&#x9;     ,@ETLLogMessage = @ErrorMessage;&#xA;&#x9;&#x9;Set @RC = -1&#xA;&#x9;End Catch&#xA;&#x9;Return @RC;&#xA;End&#xA;go&#xA;/* Testing Code:&#xA; Declare @Status int;&#xA; Exec @Status = pETLSyncDimPatients;&#xA; Print @Status;&#xA; select * from dimpatients&#xA;*/&#xA;go&#xA;&#xA;&#xA;/****** [dbo].[FactVisits] ******/&#xA;go &#xA;&#xA;Create or Alter View vETLFactVisits&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Extracts and transforms data for FactVisits&#xA;** Change Log: When,Who,What&#xA;** 2022-01-25,Yuanlong Zhang,Created Sproc (MERGE).&#xA;** 2022-03-07,Yuanlong Zhang,Created Sproc (MERGE) for final projects.&#xA;*/&#xA;As&#xA;  SELECT [VisitKey] = v.ID&#xA;        ,[DateKey] = DD.DateKey&#xA;        ,[ClinicKey] = DC.ClinicID&#xA;        ,[PatientKey] = v.Patient&#xA;        ,[DoctorKey] = CASE WHEN v.Doctor IS NULL THEN&#xA;&#x9;&#x9;    (SELECT DoctorKey FROM DimDoctors where DoctorID = -1)&#xA;&#x9;&#x9;    ELSE V.Doctor END&#xA;        ,[ProcedureKey] = v.[Procedure]&#xA;        ,[ProcedureVistCharge] = v.Charge&#xA;    FROM [is-root01.ischool.uw.edu\BI].[Patients].[dbo].[Visits] v&#xA;    JOIN DWClinicReportDataYuanlongZhang.dbo.DimDates as DD&#xA;     ON cast(v.Date as date) = cast(DD.FullDate as date)&#xA;    JOIN DWClinicReportDataYuanlongZhang.dbo.DimPatients as DP&#xA;     ON v.Patient = DP.PatientID and DP.IsCurrent = 1 -- Join with the current version of data&#xA;    JOIN DWClinicReportDataYuanlongZhang.dbo.DimClinics as DC&#xA;     ON DC.ClinicID = V.Clinic/100&#xA;    JOIN DWClinicReportDataYuanlongZhang.dbo.DimProcedures as DPC&#xA;     ON v.[Procedure]=DPC.ProcedureID -- Join with the current version of data&#xA;&#x9;LEFT OUTER JOIN DWClinicReportDataYuanlongZhang.dbo.DimDoctors as DDC&#xA;&#x9; ON v.Doctor = DDC.DoctorID&#xA;go&#xA;&#xA;/* Testing Code:&#xA; Select * From vETLFactVisits;&#xA;*/&#xA;&#xA;&#xA;go&#xA;Create or Alter Procedure pETLSyncFactVisits&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Inserts data into FactVisits&#xA;** Change Log: When,Who,What&#xA;** 2022-01-25, Yuanlong Zhang, Created Sproc (MERGE).&#xA;** 2022-03-07, Yuanlong Zhang, Created Sproc (MERGE) for final project.&#xA;*/&#xA;As&#xA; Begin&#xA;  Declare @RC int = 0;&#xA;  Begin Try&#xA;    -- ETL Processing Code：  --&#xA;&#x9;Begin Tran;&#xA;&#x9;&#x9;Merge Into FactVisits as t&#xA;&#x9;&#x9;Using vETLFactVisits as s&#xA;&#x9;&#x9;&#x9;ON t.VisitKey = s.VisitKey&#xA;&#x9;&#x9;&#x9;AND t.DateKey = s.DateKey&#xA;&#x9;&#x9;&#x9;AND t.ClinicKey = s.ClinicKey&#xA;&#x9;&#x9;&#x9;AND t.PatientKey = s.PatientKey&#xA;&#x9;&#x9;&#x9;AND t.DoctorKey = s.DoctorKey&#xA;&#x9;&#x9;&#x9;AND t.ProcedureKey = s.ProcedureKey&#xA;&#x9;&#x9;&#x9;When Not Matched &#xA;&#x9;&#x9;&#x9;&#x9;Then -- The Primary Key in Fact Table included 5 columns, when the combination of them in the Source is not found the the Target&#xA;&#x9;&#x9;&#x9;&#x9;INSERT &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;VALUES ( s.VisitKey, s.DateKey, s.ClinicKey, s.PatientKey, s.DoctorKey, s.ProcedureKey, s.ProcedureVistCharge )&#xA;&#x9;&#x9;&#x9;When Matched -- When the IDs match for the row currently being looked &#xA;&#x9;&#x9;&#x9;AND s.ProcedureVistCharge &lt;&gt; t.ProcedureVistCharge -- but the order quantity&#xA;&#x9;&#x9;&#x9;Then &#xA;&#x9;&#x9;&#x9;&#x9;UPDATE -- It know your target, so you dont specify the DimCustomers&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;SET t.ProcedureVistCharge = s.ProcedureVistCharge&#xA;&#x9;&#x9;&#x9;When Not Matched By Source &#xA;&#x9;&#x9;&#x9;&#x9;Then -- The Primary Key is in the Target table, but not the source table&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;DELETE&#xA;&#x9;&#x9;; -- The merge statement demands a semicolon at the end!&#xA;&#xA;&#xA;&#x9;Commit Tran;&#xA;&#x9;Set @RC = +1&#xA;    Exec pInsETLLog&#xA;&#x9;        @ETLAction = 'pETLSyncFactVisits'&#xA;&#x9;       ,@ETLLogMessage = 'FactVisits Synced';&#xA;    Set @RC = 1;&#xA;   End try&#xA;   Begin catch&#xA;&#x9; IF @@TranCount &gt; 0 Rollback Tran;&#xA;     Declare @ErrorMessage nvarchar(1000) = Error_Message()&#xA;&#x9; Exec pInsETLLog &#xA;&#x9;      @ETLAction = 'pETLSyncFactVisits'&#xA;&#x9;     ,@ETLLogMessage = @ErrorMessage;&#xA;     Set @RC = -1;&#xA;   End Catch&#xA;   Return @RC;&#xA; End&#xA;;&#xA;go&#xA;/* Testing Code:&#xA; Declare @Status int;&#xA; Exec @Status = pETLSyncFactVisits;&#xA; Print @Status;&#xA; select * from FactVisits&#xA;&#xA;*/&#xA;go" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Pre-Load (Data Warehouse) Sequence Container\Initialize Data Warehouse Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{1054501c-3639-42df-b6e2-898bbc487bce}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initialize Data Warehouse Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{5C660C9B-848F-4687-AF24-011E46D8B301}"
+              SQLTask:SqlStatementSource="/***************************************************************************&#xA;ETL Final Project: DWClinicReportData_YuanlongZhang&#xA;Dev: RRoot&#xA;Date:3/7/2022&#xA;Desc: This is a Data Warehouse for the Patient and DoctorsSchedule Databases.&#xA;&#x9;  ETL processing issues.&#xA;ChangeLog: (Who, When, What) &#xA;&#x9;RRoot, 3/3/17, removed addresses from DimPatients&#xA;&#x9;RRoot, 3/4/17, removed addresses from DimDoctors and DimClinic&#xA;&#x9;RRoot, 3/4/17, altered the file description&#xA;&#x9;RRoot, 3/7/17, added names to all PK and FK constraints&#xA;&#x9;RRoot, 2/21/18, added SCD columns to DimPatients&#xA;&#x9;RRoot, 2/23/31, added ETL logging tables&#xA;&#x9;Yuanlong Zhang, 3/7/22, modified the database name for ETL development project&#xA;*****************************************************************************************/&#xA;Use Master;&#xA;go&#xA;&#xA;If Exists (Select * From Sys.databases where Name = 'DWClinicReportDataYuanlongZhang')&#xA;  Begin&#xA;   Alter Database DWClinicReportDataYuanlongZhang set single_user with rollback immediate;&#xA;   Drop Database DWClinicReportDataYuanlongZhang;&#xA;  End&#xA;go&#xA;&#xA;Create Database DWClinicReportDataYuanlongZhang&#xA;go&#xA;&#xA;ALTER Database DWClinicReportDataYuanlongZhang &#xA;COLLATE SQL_Latin1_General_CP1_CI_AS&#xA;go&#xA;&#xA;Use DWClinicReportDataYuanlongZhang;&#xA;go&#xA;&#xA;&#xA;Create Table DimDates -- Type 1 SCD&#xA;(DateKey int Constraint pkDimDates Primary Key Identity &#xA;,FullDate datetime Not Null&#xA;,FullDateName nvarchar (50) Not Null &#xA;,MonthID int Not Null&#xA;,[MonthName] nvarchar(50) Not Null&#xA;,YearID int Not Null&#xA;,YearName nvarchar(50) Not Null&#xA;);&#xA;go&#xA;&#xA;Create Table DimClinics -- Type 1 SCD&#xA;(ClinicKey int Constraint pkDimClinics Primary Key Identity&#xA;,ClinicID int Not Null&#xA;,ClinicName nvarchar(100) Not Null &#xA;,ClinicCity nvarchar(100) Not Null&#xA;,ClinicState nvarchar(100) Not Null &#xA;,ClinicZip nvarchar(5) Not Null &#xA;);&#xA;go&#xA;&#xA;Create Table DimDoctors -- Type 1 SCD&#xA;(DoctorKey int Constraint pkDimDoctors Primary Key Identity&#xA;,DoctorID int Not Null  &#xA;,DoctorFullName nvarchar(200) Not Null &#xA;,DoctorEmailAddress nvarchar(100) Not Null  &#xA;,DoctorCity nvarchar(100) Not Null&#xA;,DoctorState nvarchar(100) Not Null&#xA;,DoctorZip nvarchar(5) Not Null &#xA;);&#xA;go&#xA;&#xA;Create Table DimShifts -- Type 1 SCD&#xA;(ShiftKey int Constraint pkDimShifts Primary Key Identity&#xA;,ShiftID int Not Null&#xA;,ShiftStart time(0) Not Null&#xA;,ShiftEnd time(0) Not Null&#xA;);&#xA;go&#xA;&#xA;Create Table FactDoctorShifts -- Type 1 SCD&#xA;(DoctorsShiftID int Not Null&#xA;,ShiftDateKey int Constraint fkFactDoctorShiftsToDimDates References DimDates(DateKey) Not Null&#xA;,ClinicKey int Constraint fkFactDoctorShiftsToDimClinics References DimClinics(ClinicKey) Not Null&#xA;,ShiftKey int Constraint fkFactDoctorShiftsToDimShifts References DimShifts(ShiftKey) Not Null&#xA;,DoctorKey int Constraint fkFactDoctorShiftsToDimDoctors References DimDoctors(DoctorKey) Not Null&#xA;,HoursWorked int&#xA;Constraint pkFactDoctorShifts Primary Key(DoctorsShiftID, ShiftDateKey , ClinicKey, ShiftKey, DoctorKey)&#xA;);&#xA;go&#xA;&#xA;Create Table DimProcedures -- Type 1 SCD&#xA;(ProcedureKey int Constraint pkDimProcedures Primary Key Identity&#xA;,ProcedureID int Not Null&#xA;,ProcedureName varchar(100) Not Null&#xA;,ProcedureDesc varchar(1000) Not Null&#xA;,ProcedureCharge money Not Null &#xA;);&#xA;go&#xA;&#xA;Create Table DimPatients -- Type 2 SCD&#xA;(PatientKey int Constraint pkDimPatients Primary Key Identity&#xA;,PatientID int Not Null&#xA;,PatientFullName varchar(100) Not Null&#xA;,PatientCity varchar(100) Not Null&#xA;,PatientState varchar(100) Not Null&#xA;,PatientZipCode int Not Null&#xA;,StartDate date Not Null&#xA;,EndDate date Null&#xA;,IsCurrent int Constraint ckDimPatientsIsCurrent Check (IsCurrent In (1,0))&#xA;);&#xA;go&#xA;&#xA;Create Table FactVisits -- Type 1 SCD&#xA;(VisitKey int Not Null&#xA;,DateKey int Constraint fkFactVisitsToDimDates References DimDates(DateKey) Not Null&#xA;,ClinicKey int Constraint fkFactVisitsToDimClinics References DimClinics(ClinicKey) Not Null&#xA;,PatientKey int Constraint fkFactVisitsToDimPatients References DimPatients(PatientKey) Not Null&#xA;,DoctorKey int Constraint fkFactVisitsToDimDoctors References DimDoctors(DoctorKey) Not Null&#xA;,ProcedureKey int Constraint fkFactVisitsToDimProcedures References DimProcedures(ProcedureKey) Not Null &#xA;,ProcedureVistCharge money Not Null&#xA;Constraint pkFactVisits Primary Key(VisitKey, DateKey, ClinicKey, PatientKey, DoctorKey, ProcedureKey)&#xA;);&#xA;go&#xA;&#xA;--********************************************************************--&#xA;--  Create ETL logging objects. Use these in your ETL stored procedures!&#xA;--********************************************************************--&#xA;If NOT Exists(Select * From sys.tables where Name = 'ETLLog')&#xA;  Create -- Drop&#xA;  Table ETLLog&#xA;  (ETLLogID int identity Primary Key&#xA;  ,ETLDateAndTime datetime Default GetDate()&#xA;  ,ETLAction varchar(100)&#xA;  ,ETLLogMessage varchar(2000)&#xA;  );&#xA;go&#xA;&#xA;Create or Alter View vETLLog&#xA;As&#xA;  Select&#xA;   ETLLogID&#xA;  ,ETLDate = Format(ETLDateAndTime, 'D', 'en-us')&#xA;  ,ETLTime = Format(Cast(ETLDateAndTime as datetime2), 'HH:mm', 'en-us')&#xA;  ,ETLAction&#xA;  ,ETLLogMessage&#xA;  From ETLLog;&#xA;go&#xA;&#xA;&#xA;Create or Alter Proc pInsETLLog&#xA; (@ETLAction varchar(100), @ETLLogMessage varchar(2000))&#xA;--*************************************************************************--&#xA;-- Desc:This Sproc creates an admin table for logging ETL metadata. &#xA;-- Change Log: When,Who,What&#xA;-- 2020-01-01,RRoot,Created Sproc&#xA;--*************************************************************************--&#xA;As&#xA;Begin&#xA;  Declare @RC int = 0;&#xA;  Begin Try&#xA;    Begin Tran;&#xA;      Insert Into ETLLog&#xA;       (ETLAction,ETLLogMessage)&#xA;      Values&#xA;       (@ETLAction,@ETLLogMessage)&#xA;    Commit Tran;&#xA;    Set @RC = 1;&#xA;  End Try&#xA;  Begin Catch&#xA;    If @@TRANCOUNT &gt; 0 Rollback Tran;&#xA;    Set @RC = -1;&#xA;  End Catch&#xA;  Return @RC;&#xA;End&#xA;Go" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Pre-Load (Data Warehouse) Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{03549AC3-1344-4D20-8635-A1E225517348}"
+          DTS:From="Package\Pre-Load (Data Warehouse) Sequence Container\Initialize Data Warehouse Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Pre-Load (Data Warehouse) Sequence Container\Initialize All the Store Procedures Task" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Pre-Processing DimDate Table Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{943dc899-c927-4793-84e2-fe269efe7cb9}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Pre-Processing DimDate Table Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Pre-Processing DimDate Table Sequence Container\Initialize DimDate Store Procedures Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{859598d9-e34b-4a46-a747-c74186cbd546}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initialize DimDate Store Procedures Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A0D02224-B3A7-4E11-8747-287DE75963FF}"
+              SQLTask:SqlStatementSource="pETLFillDimDates" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{a7fa7a1a-a987-40b7-8b66-cdcc90998430}"
+      DTS:From="Package\Pre-Load (Data Warehouse) Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Pre-Processing DimDate Table Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{9a64e625-b75b-4c30-a49f-74ee07cda920}"
+      DTS:From="Package\Pre-Processing DimDate Table Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load Dim Tables Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{f91e7ec9-63d0-42a2-9435-c908be0e8704}"
+      DTS:From="Package\Load Dim Tables Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load the Fact Table Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{bfd14a19-d0fc-44d0-b273-54a018eaef8d}"
+      DTS:From="Package\Load the Fact Table Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Post-Load Sequence Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="280,42"
+          Id="Package\Load Dim Tables Sequence Container\Fill DimClinic Table Task"
+          TopLeft="81.7111111111111,59.4444444444444" />
+        <NodeLayout
+          Size="280,42"
+          Id="Package\Load Dim Tables Sequence Container\Fill DimDoctors Table Task"
+          TopLeft="81.7111111111111,120.694444444444" />
+        <NodeLayout
+          Size="280,42"
+          Id="Package\Load Dim Tables Sequence Container\Fill DimPatients Table Task"
+          TopLeft="81.7111111111111,181.944444444444" />
+        <NodeLayout
+          Size="280,42"
+          Id="Package\Load Dim Tables Sequence Container\Fill DimProcedures Table Task"
+          TopLeft="81.7111111111111,243.194444444444" />
+        <NodeLayout
+          Size="280,42"
+          Id="Package\Load Dim Tables Sequence Container\Fill DimShifts Table Task"
+          TopLeft="81.7111111111111,304.444444444444" />
+        <EdgeLayout
+          Id="Package\Load Dim Tables Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="81.7111111111111,80.4444444444444">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,61.25"
+              Start="0,0"
+              End="-7.5,61.25">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,57.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,57.25"
+                    Point2="-22.5,61.25"
+                    Point3="-18.5,61.25" />
+                  <mssgle:LineSegment
+                    End="-7.5,61.25" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dim Tables Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="81.7111111111111,147.361111111111">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,55.5833333333333"
+              Start="0,0"
+              End="-7.5,55.5833333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,51.5833333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,51.5833333333333"
+                    Point2="-22.5,55.5833333333333"
+                    Point3="-18.5,55.5833333333333" />
+                  <mssgle:LineSegment
+                    End="-7.5,55.5833333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dim Tables Sequence Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="81.7111111111111,208.611111111111">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,55.5833333333333"
+              Start="0,0"
+              End="-7.5,55.5833333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,51.5833333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,51.5833333333333"
+                    Point2="-22.5,55.5833333333333"
+                    Point3="-18.5,55.5833333333333" />
+                  <mssgle:LineSegment
+                    End="-7.5,55.5833333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Dim Tables Sequence Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="81.7111111111111,269.861111111111">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,55.5833333333333"
+              Start="0,0"
+              End="-7.5,55.5833333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-18.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-18.5,0"
+                    Point2="-22.5,0"
+                    Point3="-22.5,4" />
+                  <mssgle:LineSegment
+                    End="-22.5,51.5833333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,51.5833333333333"
+                    Point2="-22.5,55.5833333333333"
+                    Point3="-18.5,55.5833333333333" />
+                  <mssgle:LineSegment
+                    End="-7.5,55.5833333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Start to incremental loading the dimension tables before the fact table"
+          ParentId="Package\Load Dim Tables Sequence Container"
+          Size="368,53"
+          Id="e9c9fe60-1c58-4e04-8c55-ce861e776242"
+          TopLeft="29.8888888888888,10.3333333333333">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="12"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="413,368"
+          Size="413,411"
+          Id="Package\Load Dim Tables Sequence Container"
+          TopLeft="773.777777777778,115.777777777777" />
+        <NodeLayout
+          Size="280,42"
+          Id="Package\Load the Fact Table Sequence Container\Fill FactDoctorShifts Table Task"
+          TopLeft="70.8888888888888,57.7777777777776" />
+        <NodeLayout
+          Size="280,42"
+          Id="Package\Load the Fact Table Sequence Container\Fill FactVisits Table Task"
+          TopLeft="69.8888888888888,127.777777777778" />
+        <EdgeLayout
+          Id="Package\Load the Fact Table Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="210.388888888889,99.7777777777776">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="After the dimension table complete incremental loading, start upate the fact table."
+          ParentId="Package\Load the Fact Table Sequence Container"
+          Size="364,53"
+          Id="85fec016-ec60-427c-b0f9-c03916c9578d"
+          TopLeft="28.8888888888888,7.7777777777776">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="12"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="414,185"
+          Size="414,228"
+          Id="Package\Load the Fact Table Sequence Container"
+          TopLeft="774.333333333334,564.333333333333" />
+        <AnnotationLayout
+          Text="Currently not needed for the ETL (incremental loading) process."
+          ParentId="Package\Post-Load Sequence Container"
+          Size="358,53"
+          Id="d8d9d8aa-b6ff-47f5-b5d0-5df49d55a4c0"
+          TopLeft="24.1111111111111,10">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="12"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="417,69"
+          Size="417,112"
+          Id="Package\Post-Load Sequence Container"
+          TopLeft="774.555555555556,816.888888888889" />
+        <NodeLayout
+          Size="260,42"
+          Id="Package\Pre-Load (Data Warehouse) Sequence Container\Initialize All the Store Procedures Task"
+          TopLeft="76,186" />
+        <NodeLayout
+          Size="259,42"
+          Id="Package\Pre-Load (Data Warehouse) Sequence Container\Initialize Data Warehouse Task"
+          TopLeft="76,85" />
+        <EdgeLayout
+          Id="Package\Pre-Load (Data Warehouse) Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="205.75,127">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,59"
+              Start="0,0"
+              End="0,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Database &amp; Store Procedures Resetting"
+          ParentId="Package\Pre-Load (Data Warehouse) Sequence Container"
+          Size="267,38"
+          Id="893d8a47-13f5-469a-a3e4-8324afcbae35"
+          TopLeft="20,4">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="12"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="Note: The script in this container should only run for the first time, or the database runs into issue and need a complete reset."
+          ParentId="Package\Pre-Load (Data Warehouse) Sequence Container"
+          FontInfo="{x:Null}"
+          Size="380,56"
+          Id="29a42ce7-9c9b-421c-9a2a-f3a56f887bef"
+          TopLeft="22,25" />
+        <AnnotationLayout
+          Text="Once completed, please disabled this container to prevent unintentionally rerun."
+          ParentId="Package\Pre-Load (Data Warehouse) Sequence Container"
+          Size="357,51"
+          Id="ea75bdfd-694d-46b0-a6c2-a0fe63f2e635"
+          TopLeft="26,238.222222222222">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FFFF0000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="408,295"
+          Size="408,338"
+          Id="Package\Pre-Load (Data Warehouse) Sequence Container"
+          TopLeft="173,186" />
+        <NodeLayout
+          Size="260,42"
+          Id="Package\Pre-Processing DimDate Table Sequence Container\Initialize DimDate Store Procedures Task"
+          TopLeft="62,145.222222222222" />
+        <AnnotationLayout
+          Text="Preprocessing DimDate Table"
+          ParentId="Package\Pre-Processing DimDate Table Sequence Container"
+          Size="206,38"
+          Id="256effb3-bf61-4327-a359-fe8fab68d0e2"
+          TopLeft="29,3">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="12"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="Note: &#xA;1. The script in this container should only run for the first time, or the dim date table need a complete reset.&#xA;2. The supported date range is between 01/01/2000 and 12/31/2030"
+          ParentId="Package\Pre-Processing DimDate Table Sequence Container"
+          FontInfo="{x:Null}"
+          Size="372,104"
+          Id="419c018d-6d3f-41f3-a786-0fa45b3816c6"
+          TopLeft="26,28" />
+        <AnnotationLayout
+          Text="Once completed, please disabled this container to prevent unintentionally rerun."
+          ParentId="Package\Pre-Processing DimDate Table Sequence Container"
+          Size="357,51"
+          Id="40d479f5-666e-44c5-98dd-d96f7452b5d4"
+          TopLeft="21,194">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FFFF0000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="408,300"
+          Size="408,343"
+          Id="Package\Pre-Processing DimDate Table Sequence Container"
+          TopLeft="175.111111111111,569.222222222222" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="378.055555555556,524">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,45.2222222222219"
+              Start="0,0"
+              End="0,37.7222222222219">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.7222222222219" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="445.777777777778,569.222222222222">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="467,-42.4444444444449"
+              Start="0,0"
+              End="467,-34.9444444444449">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-17.2234695170294" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-17.2234695170294"
+                    Point2="0,-21.2234695170294"
+                    Point3="4,-21.2234695170294" />
+                  <mssgle:LineSegment
+                    End="463,-21.2234695170294" />
+                  <mssgle:CubicBezierSegment
+                    Point1="463,-21.2234695170294"
+                    Point2="467,-21.2234695170294"
+                    Point3="467,-25.2234695170294" />
+                  <mssgle:LineSegment
+                    End="467,-34.9444444444449" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="1047.77777777778,526.777777777777">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-66.444444444444,37.555555555556"
+              Start="0,0"
+              End="-66.444444444444,30.055555555556">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.1091815404408" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.1091815404408"
+                    Point2="0,15.1091815404408"
+                    Point3="-4,15.1091815404408" />
+                  <mssgle:LineSegment
+                    End="-62.444444444444,15.1091815404408" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-62.444444444444,15.1091815404408"
+                    Point2="-66.444444444444,15.1091815404408"
+                    Point3="-66.444444444444,19.1091815404408" />
+                  <mssgle:LineSegment
+                    End="-66.444444444444,30.055555555556" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="982.194444444445,792.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,24.555555555556"
+              Start="0,0"
+              End="0,17.055555555556">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.055555555556" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Note:&#xA;To run the ETLProcess package, you must ensure UW University VPN had been established correctly.&#xA;The first two container should only run ONCE."
+          ParentId="Package"
+          Size="596,65"
+          Id="5210bd64-b7c8-4cf3-b0d9-18c28c7f9f5d"
+          TopLeft="162,115">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="ETL Processing Final Project - Data Warehouse"
+          ParentId="Package"
+          Size="645,56"
+          Id="76ed2cd4-ae1d-4935-9bbc-6727548a97c6"
+          TopLeft="360,36">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="26.25"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="Name: Yuanlong Zhang, Date: Mar.8, 2022"
+          ParentId="Package"
+          Size="257,38"
+          Id="d6c1c274-2dfb-4eaa-a4f0-10ecfb12c85e"
+          TopLeft="536,88">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="12"
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,724 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/31/2022 10:28:15 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-AO8N3T1"
+  DTS:CreatorName="DESKTOP-AO8N3T1\i_ecn"
+  DTS:DTSID="{BCA29936-A73C-4E6F-9E5B-DD1069EB70A5}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="53"
+  DTS:VersionGUID="{01009918-34F1-4F5A-9772-3089008E0F20}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.master]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9C3B1BA7-E8BA-4412-A0F0-6EC0134678BB}"
+      DTS:ObjectName="LocalHost.master">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=master;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.Patients]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{B3D1AFEE-7E50-4BBD-A7A6-1A66F113E9E5}"
+      DTS:ObjectName="LocalHost.Patients">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=Patients;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{67E59237-F2B5-4A36-BF61-7587FEC649CA}"
+      DTS:ObjectName="LocalHost.Staging">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=Staging;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Staging Tables Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{E4509759-30D7-48F5-A3EF-490205DF818F}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Staging Tables Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Load Staging Tables Sequence Container\Fill Patient Table Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{12CD18BF-9634-4D15-B5B2-AEE2BD0F2F65}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill Patient Table Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{B3D1AFEE-7E50-4BBD-A7A6-1A66F113E9E5}"
+              SQLTask:SqlStatementSource="pETLSyncPatients" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Load Staging Tables Sequence Container\Fill Visits Table Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{79DB26E6-B97F-4EB1-B47E-1CF31A907D71}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill Visits Table Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{B3D1AFEE-7E50-4BBD-A7A6-1A66F113E9E5}"
+              SQLTask:SqlStatementSource="pETLSyncVisits" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Load Staging Tables Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{01797D7D-0491-4405-978A-9F31C95B225E}"
+          DTS:From="Package\Load Staging Tables Sequence Container\Fill Patient Table Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Load Staging Tables Sequence Container\Fill Visits Table Task" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load the Fact Table Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{D6EA74B2-51F1-46AD-AE8C-A9E56A7D1B27}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load the Fact Table Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Post-Load Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{1240DD04-DCA6-4583-9F02-521675B5F8E9}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Post-Load Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Pre-Load (Databases) Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{A7ABC3F9-994C-440C-A0F7-9D9766868D7F}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Pre-Load (Databases) Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Pre-Load (Databases) Sequence Container\Initialize All the Store Procedures Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{F14F3C1C-3032-4334-B03D-522E9677BBFB}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initialize All the Store Procedures Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{B3D1AFEE-7E50-4BBD-A7A6-1A66F113E9E5}"
+              SQLTask:SqlStatementSource="USE Patients;&#xA;go&#xA;&#xA;--  Setup Logging Objects ----------------------------------------------------&#xA;&#xA;If NOT Exists(Select * From Sys.tables where Name = 'ETLLog')&#xA;  Create -- Drop&#xA;  Table ETLLog&#xA;  (ETLLogID int identity Primary Key&#xA;  ,ETLDateAndTime datetime Default GetDate()&#xA;  ,ETLAction varchar(100)&#xA;  ,ETLLogMessage varchar(2000)&#xA;  );&#xA;go&#xA;&#xA;Create or Alter View vETLLog&#xA;As&#xA;  Select&#xA;   ETLLogID&#xA;  ,ETLDate = Format(ETLDateAndTime, 'D', 'en-us')&#xA;  ,ETLTime = Format(Cast(ETLDateAndTime as datetime2), 'HH:mm', 'en-us')&#xA;  ,ETLAction&#xA;  ,ETLLogMessage&#xA;  From ETLLog;&#xA;go&#xA;&#xA;&#xA;Create or Alter Proc pInsETLLog&#xA; (@ETLAction varchar(100), @ETLLogMessage varchar(2000))&#xA;--*************************************************************************--&#xA;-- Desc:This Sproc creates an admin table for logging ETL metadata. &#xA;-- Change Log: When,Who,What&#xA;-- 2020-01-01,RRoot,Created Sproc&#xA;--*************************************************************************--&#xA;As&#xA;Begin&#xA;  Declare @RC int = 0;&#xA;  Begin Try&#xA;    Begin Tran;&#xA;      Insert Into ETLLog&#xA;       (ETLAction,ETLLogMessage)&#xA;      Values&#xA;       (@ETLAction,@ETLLogMessage)&#xA;    Commit Tran;&#xA;    Set @RC = 1;&#xA;  End Try&#xA;  Begin Catch&#xA;    If @@TRANCOUNT &gt; 0 Rollback Tran;&#xA;    Set @RC = -1;&#xA;  End Catch&#xA;  Return @RC;&#xA;End&#xA;Go&#xA;&#xA;&#xA;--********************************************************************--&#xA;-- A) Drop the FOREIGN KEY CONSTRAINTS and Clear the tables&#xA; -- NOT NEEDED FOR INCREMENTAL LOADING: &#xA;--********************************************************************--&#xA;&#xA;&#xA;--********************************************************************--&#xA;-- B) Synchronize the Tables&#xA;--********************************************************************--&#xA;&#xA;/****** [dbo].[DimCustomers] ******/&#xA;go &#xA;Create or Alter View vETLNewPatient&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Extracts and transforms data for DimCustomers&#xA;** Change Log: When,Who,What&#xA;** 2022-01-25,Yuanlong Zhang,Created Sproc (MERGE).&#xA;*/&#xA;As&#xA;  Select [FName] = [FName]&#xA;        ,[LName] = [LName]&#xA;        ,[Email] = [Email]&#xA;        ,[Address] = [Address]&#xA;        ,[City] = [City]&#xA;        ,[State] = [State]&#xA;&#x9;&#x9;,[ZipCode] = [ZipCode]&#xA;    FROM [Staging].[dbo].[StagingNewPatient]&#xA;go&#xA;/* Testing Code:&#xA; SELECT * FROM vETLNewPatient;&#xA;*/&#xA;&#xA;&#xA;&#xA;go&#xA;Create or Alter Procedure pETLSyncPatients&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Inserts data into DimCustomers&#xA;** Change Log: When,Who,What&#xA;** 2022-01-24,Yuanlong Zhang,Created Sproc (MERGE).&#xA;*/&#xA;As&#xA;Begin&#xA;  Declare @RC int = 0;&#xA;&#x9;Begin Try&#xA;    -- ETL Processing Code --&#xA;    Merge Into Patients as t&#xA;     Using vETLNewPatient as s -- For Merge to work with SCD tables, I need to insert a new row when the following is not true:&#xA;      On  t.FName = s.FName&#xA;      And t.LName = s.LName&#xA;      And t.Email = s.Email&#xA;     When Not Matched -- At least one column value does not match add a new row:&#xA;      Then&#xA;       Insert (FName, LName, Email, Address, City, State, ZipCode)&#xA;        Values (s.FName&#xA;              ,s.LName&#xA;              ,s.Email&#xA;              ,s.Address&#xA;&#x9;&#x9;&#x9;  ,s.City&#xA;&#x9;&#x9;&#x9;  ,s.State&#xA;              ,s.ZipCode)&#xA;      When Matched &#xA;&#x9;  AND (t.Address &lt;&gt; s.Address OR t.City &lt;&gt; s.City OR t.State &lt;&gt; s.State OR t.ZipCode &lt;&gt; s.ZipCode)&#xA;&#x9;  -- If there is a row in the target (dim) table that is no longer in the source table&#xA;       Then -- indicate that row is no longer current&#xA;        Update &#xA;         Set t.Address = s.Address&#xA;            ,t.City = s.City&#xA;&#x9;&#x9;&#x9;,t.State = s.State&#xA;&#x9;&#x9;&#x9;,t.ZipCode = s.ZipCode&#xA;    ;&#xA;&#xA;    -- ETL Logging Code --&#xA;&#x9;&#x9;Exec pInsETLLog&#xA;&#x9;        @ETLAction = 'pETLSyncPatients'&#xA;&#x9;       ,@ETLLogMessage = 'Patients synced';&#xA;&#x9;&#x9;Set @RC = +1&#xA;&#x9;End Try&#xA;&#xA;&#x9;-- Error Handling Code --&#xA;&#x9;Begin Catch&#xA;&#x9;&#x9;Declare @ErrorMessage nvarchar(1000) = Error_Message();&#xA;&#xA;    -- ETL Logging Code --&#xA;&#x9;&#x9;Exec pInsETLLog &#xA;&#x9;      @ETLAction = 'pETLSyncPatients'&#xA;&#x9;     ,@ETLLogMessage = @ErrorMessage;&#xA;&#x9;&#x9;Set @RC = -1&#xA;&#x9;End Catch&#xA;&#x9;Return @RC;&#xA;End&#xA;go&#xA;/* Testing Code:&#xA; Declare @Status int;&#xA; Exec @Status = pETLSyncDimCustomers;&#xA; Print @Status;&#xA;*/&#xA;go&#xA;&#xA;/*&#xA;go&#xA;Declare @Status int = 0;&#xA;Exec @Status = pETLSyncPatients;&#xA;Select [Object] = 'pETLSyncPatients', [Status] = @Status;&#xA;select * from dbo.ETLLog&#xA;&#xA;select * from Patients.dbo.Patients&#xA;--WHERE fname = 'Michael'&#xA;*/&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;--select CAST(CONCAT(CAST(CONVERT(DATE,CONVERT(CHAR(8),date),112) AS VARCHAR),' ', CAST(time AS VARCHAR)) AS DATETIME) from tempdb.dbo.stagingvisits&#xA;&#xA;--select CAST(CAST(CONCAT(CAST(CONVERT(DATE,CONVERT(CHAR(8),date),112) AS VARCHAR), ' ', CAST(time AS VARCHAR)) AS DATETIME2) AS DATETIME) from tempdb.dbo.stagingvisits&#xA;&#xA;&#xA;&#xA;&#xA;/****** [dbo].[FactOrders] ******/&#xA;go &#xA;Create or Alter View vETLVisits&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Extracts and transforms data for FactOrders&#xA;** Change Log: When,Who,What&#xA;** 2022-01-25,Yuanlong Zhang,Created Sproc (MERGE).&#xA;*/&#xA;As&#xA;  SELECT [Date] = CAST(CAST(CONCAT(CAST(CONVERT(DATE,CONVERT(CHAR(8),SV.Date),112) AS VARCHAR), ' ', CAST(SV.Time AS VARCHAR)) AS DATETIME2) AS DATETIME) &#xA;        ,[Clinic] = CLN.ID&#xA;        ,[Patient] = SV.Patient&#xA;        ,[Doctor] = SV.Doctor&#xA;        ,[Procedure] = SV.[Procedure]&#xA;        ,[Charge] = Cast(SV.Charge as decimal(18,2))&#xA;    FROM Staging.dbo.StagingVisits as SV&#xA;    JOIN [Patients].[dbo].[Clinics] as CLN&#xA;     ON SV.Clinic = CLN.City&#xA;    JOIN [Patients].[dbo].[Doctors] as DOC&#xA;&#x9; ON DOC.ID = SV.Doctor&#xA;    JOIN [Patients].[dbo].[Patients] as PAT&#xA;     ON PAT.ID = SV.Patient&#xA;    JOIN [Patients].[dbo].[Procedures] as PRO&#xA;     ON PRO.ID = SV.[Procedure]&#xA;go&#xA;&#xA;/* Testing Code:&#xA; Select * From vETLVisits;&#xA;*/&#xA;&#xA;go&#xA;Create or Alter Procedure pETLSyncVisits&#xA;/* Author: Yuanlong Zhang&#xA;** Desc: Inserts data into FactOrders&#xA;** Change Log: When,Who,What&#xA;** 2022-01-25, Yuanlong Zhang, Created Sproc (MERGE).&#xA;*/&#xA;As&#xA; Begin&#xA;  Declare @RC int = 0;&#xA;  Begin Try&#xA;    -- ETL Processing Code：  --&#xA;&#x9;Begin Tran;&#xA;&#x9;&#x9;Merge Into Visits as t&#xA;&#x9;&#x9;Using vETLVisits as s&#xA;&#x9;&#x9;&#x9;ON t.Date = s.Date&#xA;&#x9;&#x9;&#x9;AND t.Clinic = s.Clinic&#xA;&#x9;&#x9;&#x9;AND t.Patient = s.Patient&#xA;&#x9;&#x9;&#x9;AND t.Doctor = s.Doctor&#xA;&#x9;&#x9;&#x9;AND t.[Procedure] = s.[Procedure]&#xA;&#x9;&#x9;&#x9;When Not Matched &#xA;&#x9;&#x9;&#x9;&#x9;Then -- The Primary Key in Fact Table included 5 columns, when the combination of them in the Source is not found the the Target&#xA;&#x9;&#x9;&#x9;&#x9;INSERT &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;VALUES ( s.Date, s.Clinic, s.Patient, s.Doctor, s.[Procedure], s.Charge )&#xA;&#x9;&#x9;; -- The merge statement demands a semicolon at the end!&#xA;&#xA;&#x9;Commit Tran;&#xA;&#x9;Set @RC = +1&#xA;    Exec pInsETLLog&#xA;&#x9;        @ETLAction = 'pETLSyncVisits'&#xA;&#x9;       ,@ETLLogMessage = 'Visits Synced';&#xA;    Set @RC = 1;&#xA;   End try&#xA;   Begin catch&#xA;&#x9; IF @@TranCount &gt; 0 Rollback Tran;&#xA;     Declare @ErrorMessage nvarchar(1000) = Error_Message()&#xA;&#x9; Exec pInsETLLog &#xA;&#x9;      @ETLAction = 'pETLSyncVisits'&#xA;&#x9;     ,@ETLLogMessage = @ErrorMessage;&#xA;     Set @RC = -1;&#xA;   End Catch&#xA;   Return @RC;&#xA; End&#xA;;&#xA;go&#xA;/* Testing Code:&#xA; Declare @Status int;&#xA; Exec @Status = pETLSyncVisits;&#xA; Print @Status;&#xA;*/&#xA;go&#xA;&#xA;/*&#xA;select * from Visits&#xA;*/&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Pre-Load (Databases) Sequence Container\Initialize Data Warehouse Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{51514404-D7B3-4CF0-97D3-68C7277C04FC}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initialize Data Warehouse Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9C3B1BA7-E8BA-4412-A0F0-6EC0134678BB}"
+              SQLTask:SqlStatementSource="ALTER DATABASE [Patients] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;&#xA;RESTORE DATABASE [Patients] &#xA; FROM DISK = N'C:/_BISolutions/Databases/Patients.bak' &#xA; WITH RECOVERY, REPLACE;&#xA;ALTER DATABASE [Patients] SET MULTI_USER;&#xA;go&#xA;ALTER DATABASE [DoctorsSchedules] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;&#xA;RESTORE DATABASE [DoctorsSchedules] &#xA; FROM DISK = N'C:/_BISolutions/Databases/DoctorsSchedules.bak' &#xA; WITH RECOVERY, REPLACE;&#xA;ALTER DATABASE [Patients] SET MULTI_USER;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Pre-Load (Databases) Sequence Container\Initialize Staging Database Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{EADB55BD-4059-4A40-948F-A529CE9AB380}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initialize Staging Database Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{9C3B1BA7-E8BA-4412-A0F0-6EC0134678BB}"
+              SQLTask:SqlStatementSource="USE [master];&#xA;        If Exists (Select * from Sysdatabases Where Name = 'Staging')&#xA;            Begin &#xA;                ALTER DATABASE [Staging] SET SINGLE_USER WITH ROLLBACK IMMEDIATE&#xA;                DROP DATABASE [Staging]&#xA;            End&#xA;Create Database Staging;&#xA;ALTER DATABASE Staging SET SINGLE_USER WITH ROLLBACK IMMEDIATE;&#xA;ALTER DATABASE Staging collate SQL_Latin1_General_CP1_CI_AS;&#xA;ALTER DATABASE Staging SET MULTI_USER;&#xA;go&#xA;&#xA;Use Staging;If (object_id('StagingNewPatient') is not null) Drop Table StagingNewPatient;&#xA;&#xA;Create Table StagingNewPatient&#xA;            (FName nvarchar(50)&#xA;            ,LName nvarchar(50)&#xA;            ,Email nvarchar(100)&#xA;            ,Address nvarchar(100)&#xA;            ,City nvarchar(50)&#xA;            ,State nvarchar(50)&#xA;            ,ZipCode nvarchar(20)&#xA;            ,Date nvarchar(20)&#xA;            ,Clinic nvarchar(20) );&#xA;&#xA;Use Staging;If (object_id('StagingVisits') is not null) Drop Table StagingVisits;&#xA;&#xA;Create Table StagingVisits&#xA;            (Time time&#xA;            ,Patient int&#xA;            ,Doctor int&#xA;            ,[Procedure] int&#xA;            ,Charge int&#xA;            ,Date int&#xA;            ,Clinic nvarchar(20) );" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Pre-Load (Databases) Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{09950041-2CBA-47E8-8FF1-555CF0F36704}"
+          DTS:From="Package\Pre-Load (Databases) Sequence Container\Initialize Data Warehouse Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Pre-Load (Databases) Sequence Container\Initialize Staging Database Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Pre-Load (Databases) Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{8F584C93-7B0F-4289-A9A1-7099F0BC92EF}"
+          DTS:From="Package\Pre-Load (Databases) Sequence Container\Initialize Staging Database Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Pre-Load (Databases) Sequence Container\Initialize All the Store Procedures Task" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Pre-Processing Python Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{D4A509F4-DE1B-4FCF-A50C-5D6BF0F9DF73}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Pre-Processing Python Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Pre-Processing Python Sequence Container\Python Data Pre-Processing Task"
+          DTS:CreationName="Microsoft.ExecuteProcess"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute Process Task"
+          DTS:DTSID="{EEA10E49-9225-4F4C-AD43-C24E5BDA8B21}"
+          DTS:ExecutableType="Microsoft.ExecuteProcess"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Python Data Pre-Processing Task"
+          DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecuteProcessData
+              Executable="C:\Python\Python310\pythonw.exe"
+              Arguments="&quot;C:\_BISolutions\ETLFinal_YuanlongZhang\Scripts\PythonETL.py&quot;" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{7053639A-A9E2-430B-B7C5-ADD03DB98FF7}"
+      DTS:From="Package\Pre-Load (Databases) Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Pre-Processing Python Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{86CEAB02-90D8-41A1-B091-D6A619286B5E}"
+      DTS:From="Package\Pre-Processing Python Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load Staging Tables Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{5418CC1C-19D3-4E6A-A134-F08ECE82F355}"
+      DTS:From="Package\Load Staging Tables Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Load the Fact Table Sequence Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{20832460-F257-4C97-91E1-4DCEA1140AAA}"
+      DTS:From="Package\Load the Fact Table Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Post-Load Sequence Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="280,42"
+          Id="Package\Load Staging Tables Sequence Container\Fill Patient Table Task"
+          TopLeft="83.0000000000002,84.4444444444444" />
+        <NodeLayout
+          Size="281,42"
+          Id="Package\Load Staging Tables Sequence Container\Fill Visits Table Task"
+          TopLeft="84.4444444444446,168.888888888889" />
+        <EdgeLayout
+          Id="Package\Load Staging Tables Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="223.972222222222,126.444444444444">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,42.4444444444446"
+              Start="0,0"
+              End="0,34.9444444444446">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.9444444444446" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Start to incremental loading the dimension tables before the fact table"
+          ParentId="Package\Load Staging Tables Sequence Container"
+          Size="368,53"
+          Id="64af6258-8c2f-4b17-bd07-8150ccf5d53e"
+          TopLeft="29.8888888888888,10.3333333333333">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="12"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="413,229"
+          Size="413,272"
+          Id="Package\Load Staging Tables Sequence Container"
+          TopLeft="818.111111111111,191.444444444444" />
+        <AnnotationLayout
+          Text="After the dimension table complete incremental loading, start upate the fact table."
+          ParentId="Package\Load the Fact Table Sequence Container"
+          Size="364,53"
+          Id="f1af7c31-18bb-499d-82ed-794599209b97"
+          TopLeft="28.8888888888888,7.7777777777776">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="12"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="412,119"
+          Size="412,162"
+          Id="Package\Load the Fact Table Sequence Container"
+          TopLeft="816.666666666667,558.666666666667" />
+        <AnnotationLayout
+          Text="Currently not needed for the ETL (incremental loading) process."
+          ParentId="Package\Post-Load Sequence Container"
+          Size="358,53"
+          Id="1f72d66c-ba9c-4e0c-9c84-5f7575582653"
+          TopLeft="37,11">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="12"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="411,69"
+          Size="411,112"
+          Id="Package\Post-Load Sequence Container"
+          TopLeft="820,772" />
+        <NodeLayout
+          Size="260,42"
+          Id="Package\Pre-Load (Databases) Sequence Container\Initialize All the Store Procedures Task"
+          TopLeft="75,225" />
+        <NodeLayout
+          Size="259,42"
+          Id="Package\Pre-Load (Databases) Sequence Container\Initialize Data Warehouse Task"
+          TopLeft="76,85" />
+        <NodeLayout
+          Size="263,42"
+          Id="Package\Pre-Load (Databases) Sequence Container\Initialize Staging Database Task"
+          TopLeft="73,154" />
+        <EdgeLayout
+          Id="Package\Pre-Load (Databases) Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="205,127">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Pre-Load (Databases) Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="204.75,196">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,29"
+              Start="0,0"
+              End="0,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Database &amp; Store Procedures Resetting"
+          ParentId="Package\Pre-Load (Databases) Sequence Container"
+          Size="267,38"
+          Id="c7c57a7b-8914-4538-b3e3-35187917363e"
+          TopLeft="20,4">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="12"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="Note: The script in this container should only run for the first time, or the database runs into issue and need a complete reset."
+          ParentId="Package\Pre-Load (Databases) Sequence Container"
+          FontInfo="{x:Null}"
+          Size="380,56"
+          Id="757ac49e-1314-4bcd-a26b-a0455431f8e0"
+          TopLeft="22,25" />
+        <AnnotationLayout
+          Text="Once completed, please disabled this container to prevent unintentionally rerun."
+          ParentId="Package\Pre-Load (Databases) Sequence Container"
+          Size="357,51"
+          Id="8af1810d-81ea-4772-bc8a-a50ddd611877"
+          TopLeft="33,279.222222222222">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FFFF0000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="408,336"
+          Size="408,379"
+          Id="Package\Pre-Load (Databases) Sequence Container"
+          TopLeft="246,189" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\Pre-Processing Python Sequence Container\Python Data Pre-Processing Task"
+          TopLeft="105,136" />
+        <AnnotationLayout
+          Text="Preprocessing Python Script"
+          ParentId="Package\Pre-Processing Python Sequence Container"
+          Size="199,38"
+          Id="5812b0d2-f945-4e88-bc33-d4adc1727588"
+          TopLeft="29,3">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="12"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="Note: &#xA;1. Before execute, please make sure the data had been loaded into&#xA;C:\_BISolutions\ETLFinal_YuanlongZhang\DataFiles\ClinicDailyData"
+          ParentId="Package\Pre-Processing Python Sequence Container"
+          FontInfo="{x:Null}"
+          Size="381,72"
+          Id="1ba03261-feb9-464c-a237-ea9b6d79c85a"
+          TopLeft="26,28" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="412,224"
+          Size="412,267"
+          Id="Package\Pre-Processing Python Sequence Container"
+          TopLeft="242.166666666667,612.222222222222" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="450,568">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-69.1666666666664,44.2222222222219"
+              Start="0,0"
+              End="-69.1666666666664,36.7222222222219">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.4306898774982" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.4306898774982"
+                    Point2="0,26.4306898774982"
+                    Point3="-4,26.4306898774982" />
+                  <mssgle:LineSegment
+                    End="-65.1666666666664,26.4306898774982" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-65.1666666666664,26.4306898774982"
+                    Point2="-69.1666666666664,26.4306898774982"
+                    Point3="-69.1666666666664,30.4306898774982" />
+                  <mssgle:LineSegment
+                    End="-69.1666666666664,36.7222222222219" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="515.5,612.222222222222">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="441.611111111111,-148.777777777778"
+              Start="0,0"
+              End="441.611111111111,-141.277777777778">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-70.3897548526957" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-70.3897548526957"
+                    Point2="0,-74.3897548526957"
+                    Point3="4,-74.3897548526957" />
+                  <mssgle:LineSegment
+                    End="437.611111111111,-74.3897548526957" />
+                  <mssgle:CubicBezierSegment
+                    Point1="437.611111111111,-74.3897548526957"
+                    Point2="441.611111111111,-74.3897548526957"
+                    Point3="441.611111111111,-78.3897548526957" />
+                  <mssgle:LineSegment
+                    End="441.611111111111,-141.277777777778" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="1092.11111111111,463.444444444444">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-69.444444444444,95.2222222222227"
+              Start="0,0"
+              End="-69.444444444444,87.7222222222227">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.3093744975078" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34.3093744975078"
+                    Point2="0,38.3093744975078"
+                    Point3="-4,38.3093744975078" />
+                  <mssgle:LineSegment
+                    End="-65.444444444444,38.3093744975078" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-65.444444444444,38.3093744975078"
+                    Point2="-69.444444444444,38.3093744975078"
+                    Point3="-69.444444444444,42.3093744975078" />
+                  <mssgle:LineSegment
+                    End="-69.444444444444,87.7222222222227" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="1024.08333333333,720.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,51.333333333333"
+              Start="0,0"
+              End="0,43.833333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.833333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Note:&#xA;If it's the first time you run the package, please enable ALL container and execute; otherwise, please disabled the first and second container before running."
+          ParentId="Package"
+          Size="912,51"
+          Id="18e5ed90-3834-4daf-aaa9-27ab051a7bff"
+          TopLeft="235,118">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="11.25"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="ETL Processing Final Project - CSV to Database"
+          ParentId="Package"
+          Size="645,56"
+          Id="2602f652-f5c5-40b3-b7c2-508ad899cd94"
+          TopLeft="425,36">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="26.25"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <AnnotationLayout
+          Text="Name: Yuanlong Zhang, Date: Mar.4, 2022"
+          ParentId="Package"
+          Size="257,38"
+          Id="0c931126-c29b-4b8d-8a2d-2c736af12038"
+          TopLeft="609,91">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="12"
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

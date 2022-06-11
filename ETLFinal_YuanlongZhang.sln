@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Databases", "Databases", "{A3FA1485-2D48-4911-87E6-B6D59D91E482}"
+	ProjectSection(SolutionItems) = preProject
+		Databases\DoctorsSchedules.bak = Databases\DoctorsSchedules.bak
+		Databases\Patients.bak = Databases\Patients.bak
+		Databases\README.txt = Databases\README.txt
+	EndProjectSection
+EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ETLFinalSSISPackages", "ETLPackages\ETLFinalSSISPackages.dtproj", "{867EC7E4-4829-4ED2-8A97-43A062DD143F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PythonProject", "PythonProject", "{1D21F693-5F83-4923-8E0D-72D83E349AE1}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ETLFinal_YuanlongZhang", "PythonProject\ETLFinal_YuanlongZhang.pyproj", "{D85FCAAD-D43B-4444-A519-E6257DA79759}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{456D8020-69E9-42B9-A86F-5DF1A4ACE3A7}"
+	ProjectSection(SolutionItems) = preProject
+		Documents\BISolutionWorksheets.xlsx = Documents\BISolutionWorksheets.xlsx
+		Documents\Final_Manual.pdf = Documents\Final_Manual.pdf
+		Documents\Lessons Learned.pdf = Documents\Lessons Learned.pdf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLScripts", "SQLScripts", "{B446F87D-73D8-40AC-A389-DCA491B8BB15}"
+	ProjectSection(SolutionItems) = preProject
+		SQLScripts\Create DWClinicReportData.sql = SQLScripts\Create DWClinicReportData.sql
+		SQLScripts\DWETLObjects.sql = SQLScripts\DWETLObjects.sql
+		SQLScripts\DWMongoDBView.sql = SQLScripts\DWMongoDBView.sql
+		SQLScripts\ETLJob.sql = SQLScripts\ETLJob.sql
+		SQLScripts\ETLLoading.sql = SQLScripts\ETLLoading.sql
+		SQLScripts\ETLViews.sql = SQLScripts\ETLViews.sql
+	EndProjectSection
+EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "ETLDashboardReports", "ETLDashboardReports\ETLDashboardReports.rptproj", "{DCE62E15-1F61-4785-BA41-FA4A55040883}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DebugLocal|Any CPU = DebugLocal|Any CPU
+		Development|Any CPU = Development|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{867EC7E4-4829-4ED2-8A97-43A062DD143F}.Debug|Any CPU.ActiveCfg = Development
+		{867EC7E4-4829-4ED2-8A97-43A062DD143F}.Debug|Any CPU.Build.0 = Development
+		{867EC7E4-4829-4ED2-8A97-43A062DD143F}.DebugLocal|Any CPU.ActiveCfg = Development
+		{867EC7E4-4829-4ED2-8A97-43A062DD143F}.DebugLocal|Any CPU.Build.0 = Development
+		{867EC7E4-4829-4ED2-8A97-43A062DD143F}.Development|Any CPU.ActiveCfg = Development
+		{867EC7E4-4829-4ED2-8A97-43A062DD143F}.Development|Any CPU.Build.0 = Development
+		{867EC7E4-4829-4ED2-8A97-43A062DD143F}.Release|Any CPU.ActiveCfg = Development
+		{867EC7E4-4829-4ED2-8A97-43A062DD143F}.Release|Any CPU.Build.0 = Development
+		{D85FCAAD-D43B-4444-A519-E6257DA79759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D85FCAAD-D43B-4444-A519-E6257DA79759}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{D85FCAAD-D43B-4444-A519-E6257DA79759}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{D85FCAAD-D43B-4444-A519-E6257DA79759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCE62E15-1F61-4785-BA41-FA4A55040883}.Debug|Any CPU.ActiveCfg = Debug
+		{DCE62E15-1F61-4785-BA41-FA4A55040883}.Debug|Any CPU.Build.0 = Debug
+		{DCE62E15-1F61-4785-BA41-FA4A55040883}.Debug|Any CPU.Deploy.0 = Debug
+		{DCE62E15-1F61-4785-BA41-FA4A55040883}.DebugLocal|Any CPU.ActiveCfg = DebugLocal
+		{DCE62E15-1F61-4785-BA41-FA4A55040883}.DebugLocal|Any CPU.Build.0 = DebugLocal
+		{DCE62E15-1F61-4785-BA41-FA4A55040883}.Development|Any CPU.ActiveCfg = Debug
+		{DCE62E15-1F61-4785-BA41-FA4A55040883}.Development|Any CPU.Build.0 = Debug
+		{DCE62E15-1F61-4785-BA41-FA4A55040883}.Development|Any CPU.Deploy.0 = Debug
+		{DCE62E15-1F61-4785-BA41-FA4A55040883}.Release|Any CPU.ActiveCfg = Release
+		{DCE62E15-1F61-4785-BA41-FA4A55040883}.Release|Any CPU.Build.0 = Release
+		{DCE62E15-1F61-4785-BA41-FA4A55040883}.Release|Any CPU.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D85FCAAD-D43B-4444-A519-E6257DA79759} = {1D21F693-5F83-4923-8E0D-72D83E349AE1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2DC21D3-9D61-4661-A492-E20B245A835F}
+	EndGlobalSection
+EndGlobal
